@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "categoryIcon": "/src/assets/category-list-icon/software-development.png",
+    "categoryName": "Software Development",
+    "availablePosition": 250
+  },
+  {
+    "id": 2,
+    "categoryIcon": "/src/assets/category-list-icon/marketing-sales.png",
+    "categoryName": "Marketing & Sales",
+    "availablePosition": 180
+  },
+  {
+    "id": 3,
+    "categoryIcon": "/src/assets/category-list-icon/healthcare-nursing.png",
+    "categoryName": "Healthcare & Nursing",
+    "availablePosition": 120
+  },
+  {
+    "id": 4,
+    "categoryIcon": "/src/assets/category-list-icon/engineering.png",
+    "categoryName": "Engineering",
+    "availablePosition": 100
+  },
+  {
+    "id": 5,
+    "categoryIcon": "/src/assets/category-list-icon/human-resources.png",
+    "categoryName": "Human Resources",
+    "availablePosition": 75
+  },
+  {
+    "id": 6,
+    "categoryIcon": "/src/assets/category-list-icon/finance-accounting.png",
+    "categoryName": "Finance & Accounting",
+    "availablePosition": 90
+  },
+  {
+    "id": 7,
+    "categoryIcon": "/src/assets/category-list-icon/education-training.png",
+    "categoryName": "Education & Training",
+    "availablePosition": 60
+  },
+  {
+    "id": 8,
+    "categoryIcon": "/src/assets/category-list-icon/customer-service.png",
+    "categoryName": "Customer Service",
+    "availablePosition": 200
+  },
+  {
+    "id": 9,
+    "categoryIcon": "/src/assets/category-list-icon/retail-sales.png",
+    "categoryName": "Retail & Sales",
+    "availablePosition": 150
+  },
+  {
+    "id": 10,
+    "categoryIcon": "/src/assets/category-list-icon/creative-design.png",
+    "categoryName": "Creative & Design",
+    "availablePosition": 50
+  }
+]
