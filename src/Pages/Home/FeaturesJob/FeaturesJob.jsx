@@ -4,7 +4,7 @@ import JobCard from "@/Pages/Shared/JobCard/JobCard";
 const FeaturesJob = () => {
   const [featuresJob, setFeaturesJob] = useState([]);
   useEffect(() => {
-    fetch("jobs.json")
+    fetch("http://localhost:5000/allJobs")
       .then((res) => res.json())
       .then((data) =>
         setFeaturesJob(data.filter((features) => features.featuredJob === true))
@@ -20,7 +20,7 @@ const FeaturesJob = () => {
 
       <div className="grid lg:grid-cols-3 gap-5 mt-16">
         {featuresJob?.map((featureJob) => (
-          <JobCard key={featureJob.id} allJob={featureJob}></JobCard>
+          <JobCard key={featureJob._id} allJob={featureJob}></JobCard>
         ))}
       </div>
     </div>

@@ -5,10 +5,11 @@ import JobCard from "../Shared/JobCard/JobCard";
 const AllJobs = () => {
   const [allJobs, setAllJobs] = useState([]);
   useEffect(() => {
-    fetch("jobs.json")
+    fetch("http://localhost:5000/allJobs")
       .then((res) => res.json())
       .then((data) => setAllJobs(data));
   }, []);
+
   return (
     <div className="mb-20">
       <div className="h-60 bg-[#65e7a1] flex items-center justify-center mb-20 flex-col">
@@ -22,7 +23,7 @@ const AllJobs = () => {
 
       <div className="grid lg:grid-cols-3 gap-5 mt-16 max-w-screen-xl mx-auto">
         {allJobs?.map((allJob) => (
-          <JobCard key={allJob.id} allJob={allJob}></JobCard>
+          <JobCard key={allJob._id} allJob={allJob}></JobCard>
         ))}
       </div>
     </div>

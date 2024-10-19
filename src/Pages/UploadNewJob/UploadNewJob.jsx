@@ -1,15 +1,46 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const UploadNewJob = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    if (data) {
+      Swal.fire({
+        title: "Do you want to Upload the Job?",
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: "Upload",
+        denyButtonText: `Don't Upload`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          fetch("http://localhost:5000/addJob", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                reset();
+                Swal.fire("Uploaded!", "", "success");
+              }
+            });
+        } else if (result.isDenied) {
+          Swal.fire("Not uploaded, Thanks!", "", "warning");
+        }
+      });
+    }
+  };
 
   return (
     <div className="mb-20">

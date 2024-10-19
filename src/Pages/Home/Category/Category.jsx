@@ -4,7 +4,7 @@ import CategoryCard from "./CategoryCard";
 const Category = () => {
   const [categoryList, setCategoryList] = useState([]);
   useEffect(() => {
-    fetch("categoryList.json")
+    fetch("http://localhost:5000/categorylist")
       .then((res) => res.json())
       .then((data) => setCategoryList(data));
   }, []);
@@ -18,7 +18,7 @@ const Category = () => {
 
       <div className="grid grid-cols-4 gap-5 mt-16">
         {categoryList?.map((jobs) => (
-          <CategoryCard key={jobs.id} jobs={jobs}></CategoryCard>
+          <CategoryCard key={jobs._id} jobs={jobs}></CategoryCard>
         ))}
       </div>
     </div>

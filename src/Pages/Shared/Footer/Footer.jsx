@@ -1,7 +1,44 @@
 import { Link } from "react-router-dom";
 import LogoWhite from "../../../assets/job-finder-logo-white.png";
 
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+
 const Footer = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (email) => {
+    if (email) {
+      console.log(email);
+
+      fetch("http://localhost:5000/addEmail", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(email),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.insertedId) {
+            reset();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Subscription Confirmed",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+    }
+  };
+
   return (
     <footer className="h-80 px-10 py-7 border-t-[1px] bg-black grid grid-cols-3 gap-10">
       <div className="text-start">
@@ -27,12 +64,6 @@ const Footer = () => {
         <p className="font-medium">
           <a href="/allJobs">All Jobs</a>
         </p>
-        <p className="font-medium">
-          <a href="/aboutUs">About Us</a>
-        </p>
-        <p className="font-medium">
-          <a href="/contact">Contact</a>
-        </p>
       </div>
 
       <div className="max-w-xl lg:max-w-lg pt-4">
@@ -43,17 +74,20 @@ const Footer = () => {
           Stay updated with the latest job opportunities! Subscribe to the Job
           Finder newsletter and never miss a career move.
         </p>
-        <div className="mt-6 flex max-w-md gap-x-4">
-          <label htmlFor="email-address" className="sr-only">
+        <form
+          className="mt-6 flex max-w-md gap-x-4"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <label htmlFor="email" className="sr-only">
             Email address
           </label>
           <input
-            id="email-address"
-            name="email"
+            id="email"
             type="email"
             required
             placeholder="Enter your email"
             autoComplete="email"
+            {...register("email")}
             className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-[#4CAF7A] sm:text-sm sm:leading-6"
           />
           <button
@@ -62,7 +96,7 @@ const Footer = () => {
           >
             Subscribe
           </button>
-        </div>
+        </form>
       </div>
     </footer>
   );

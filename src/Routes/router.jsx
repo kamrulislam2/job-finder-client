@@ -23,14 +23,14 @@ export const router = createBrowserRouter([
         path: "/jobDetails/:id",
         element: <JobDetails></JobDetails>,
         loader: async () => {
-          return fetch(`/jobs.json`);
+          return fetch(`http://localhost:5000/allJobs`);
         },
       },
       {
         path: "/:categoryName",
         element: <CategoryWiseJob></CategoryWiseJob>,
         loader: async () => {
-          return fetch(`/jobs.json`);
+          return fetch(`http://localhost:5000/allJobs`);
         },
       },
       {
