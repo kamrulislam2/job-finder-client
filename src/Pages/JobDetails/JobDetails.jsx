@@ -14,9 +14,9 @@ const JobDetails = () => {
     jobCategory,
     jobDescription,
     responsibilities,
-    skillsAndRequirements,
+    requirements,
     salary,
-    publishedDate,
+    deadline,
   } = allJobs?.find((job) => job.id == id);
 
   return (
@@ -34,7 +34,7 @@ const JobDetails = () => {
       <div className="w-1/2 mx-auto mb-20 text-left rounded-lg px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400">
         <div className="flex justify-between items-center">
           <h2 className="font-bold text-xl ">{jobTitle}</h2>
-          <p className="text-xs">Published Date: {publishedDate}</p>
+          <p className="text-xs">Deadline: {deadline}</p>
         </div>
         <p className="text-[10px] mb-2 text-muted-foreground">
           Category: {jobCategory}
@@ -66,7 +66,7 @@ const JobDetails = () => {
         </div>
         <div className="my-10">
           <h2 className="text-xl font-bold mb-4">Requirements:</h2>
-          <p className="text-gray-500">{skillsAndRequirements}</p>
+          <p className="text-gray-500">{requirements}</p>
         </div>
         <Link to={`/jobDetails/${id}`}>
           <button className="font-bold text-lg text-white bg-[#4CAF7A] hover:bg-[#54c388] py-3 px-3 lg:px-5 rounded-lg mb-auto shadow-2xl shadow-slate-700 hover:transition-all hover:scale-105">

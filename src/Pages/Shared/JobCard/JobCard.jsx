@@ -13,9 +13,9 @@ const JobCard = ({ allJob }) => {
     jobCategory,
     jobDescription,
     responsibilities,
-    skillsAndRequirements,
+    requirements,
     salary,
-    publishedDate,
+    deadline,
   } = allJob;
 
   return (
