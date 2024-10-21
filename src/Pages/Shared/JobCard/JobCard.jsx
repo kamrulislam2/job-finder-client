@@ -15,11 +15,11 @@ const JobCard = ({ allJob }) => {
       <p className="border rounded-md border-[#4CAF7A] text-[#4CAF7A] font-extrabold text-base text-center py-2 px-5 w-1/2 my-3">
         {jobType}
       </p>
-      <p className="inline-flex gap-2 items-center font-semibold text-lg text-gray-500 mb-4 lg:mb-0">
+      <p className="flex gap-2 items-center font-semibold text-lg text-gray-500 mb-4 lg:mb-0">
         <GrMap className="h-6 w-6 bg-white" />
         Location: {jobLocation}
       </p>
-      <div className="inline-flex gap-2 items-center mb-4">
+      <div className="flex gap-2 items-center mb-4">
         <HiOutlineCurrencyDollar className="h-6 w-6 text-gray-500" />
         <p className=" font-semibold text-lg text-gray-500 break-words">
           Salary : {salary}

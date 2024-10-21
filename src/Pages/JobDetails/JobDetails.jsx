@@ -69,7 +69,7 @@ const JobDetails = () => {
           <h2 className="text-xl font-bold mb-4">Requirements:</h2>
           <p className="text-gray-500">{requirements}</p>
         </div>
-        <Link to={`/jobDetails/${_id}`}>
+        <Link to={`/applyNow/${_id}`}>
           <button className="font-bold text-lg text-white bg-[#4CAF7A] hover:bg-[#54c388] py-3 px-3 lg:px-5 rounded-lg mb-auto shadow-2xl shadow-slate-700 hover:transition-all hover:scale-105">
             Apply Now
           </button>

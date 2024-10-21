@@ -1,5 +1,6 @@
 import Main from "@/Main/Main";
 import AllJobs from "@/Pages/AllJobs/AllJobs";
+import ApplyNow from "@/Pages/ApplyNow/ApplyNow";
 import CategoryWiseJob from "@/Pages/CategoryWiseJob/CategoryWiseJob";
 import Home from "@/Pages/Home/Home/Home";
 import JobDetails from "@/Pages/JobDetails/JobDetails";
@@ -22,6 +23,13 @@ export const router = createBrowserRouter([
       {
         path: "/jobDetails/:id",
         element: <JobDetails></JobDetails>,
+        loader: async () => {
+          return fetch(`http://localhost:5000/allJobs`);
+        },
+      },
+      {
+        path: "/applyNow/:id",
+        element: <ApplyNow></ApplyNow>,
         loader: async () => {
           return fetch(`http://localhost:5000/allJobs`);
         },
