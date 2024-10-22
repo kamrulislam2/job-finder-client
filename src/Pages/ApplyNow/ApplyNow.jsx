@@ -3,11 +3,12 @@ import { Link, useLoaderData, useParams } from "react-router-dom";
 import { GrMap } from "react-icons/gr";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { useForm } from "react-hook-form";
-import emailjs from "@emailjs/browser";
+import Swal from "sweetalert2";
 
 const ApplyNow = () => {
   const allJobs = useLoaderData();
   const { id } = useParams();
+
   const {
     jobTitle,
     companyName,
@@ -28,40 +29,35 @@ const ApplyNow = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    // const applicationForm = {
-    //   Name: data.name,
-    //   Email: data.email,
-    //   Phone: data.phone,
-    //   Resume: data.resume[0].name,
-    //   JobTitle: jobTitle,
-    //   CompanyName: companyName,
-    // };
-    // console.log(applicationForm);
+    const formData = new FormData();
+    console.log(data);
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("phone", data.phone);
+    formData.append("resume", data.resume[0]); // This is the file
+    formData.append("jobTitle", jobTitle);
+    formData.append("companyName", companyName);
+    formData.append("yourself", data.yourself);
 
-    emailjs
-      .sendForm(
-        "service_lihlaix",
-        "template_cqsstgy",
-        {
-          form_name: data.name,
-          form_email: data.email,
-          //   Phone: data.phone,
-          //   Resume: data.resume[0].name,
-          //   JobTitle: jobTitle,
-          //   CompanyName: companyName,
-        },
-        {
-          publicKey: "rF_0gEevPF1M6VvtC",
+    fetch("http://localhost:5000/appliedJob", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          reset();
+          Swal.fire(
+            "You have successfully applied for the job!",
+            "",
+            "success"
+          );
         }
-      )
-      .then(
-        () => {
-          console.log("SUCCESS!");
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
+      })
+      .catch((error) => {
+        console.error("Error submitting form:", error);
+        Swal.fire("Error", "Could not submit your application", "error");
+      });
   };
 
   return (
@@ -171,15 +167,16 @@ const ApplyNow = () => {
         </div>
 
         {/* Resume or CV */}
-        <div className="mb-8">
+        <div className="mb-8 rounded-lg">
           <label htmlFor="resume" className="cursor-pointer text-lg font-bold">
-            Resume
+            Please Upload Your Resume{" "}
+            <span className="font-bold">(PDF Only):</span>
           </label>
           <input
             type="file"
             id="resume"
             accept=".pdf"
-            className="block border-[1px] border-[#4CAF7A] rounded-md p-2 w-full focus-visible:outline-[#4CAF7A] mt-2"
+            className=" border-[1px] border-[#4CAF7A] rounded-md p-2 w-full focus-visible:outline-[#4CAF7A] mt-2"
             placeholder="Please drop your resume"
             {...register("resume")}
             required
