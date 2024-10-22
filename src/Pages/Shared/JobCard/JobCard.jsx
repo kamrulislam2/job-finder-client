@@ -7,12 +7,12 @@ const JobCard = ({ allJob }) => {
   const { _id, jobTitle, companyName, jobType, jobLocation, salary } = allJob;
 
   return (
-    <div className="text-left rounded-lg px-8 py-10 h-full border-b-8 border-r-2 border-b-[#4CAF7A] border-r-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400">
+    <div className="text-left rounded-lg px-6 sm:px-8 py-10 h-full border-b-8 border-r-2 border-b-[#4CAF7A] border-r-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400">
       <Link to={`/jobDetails/${_id}`}>
         <h2 className="font-bold text-xl mb-2">{jobTitle}</h2>
       </Link>
       <p className="font-semibold text-lg text-gray-500">{companyName}</p>
-      <p className="border rounded-md border-[#4CAF7A] text-[#4CAF7A] font-extrabold text-base text-center py-2 px-5 w-1/2 my-3">
+      <p className="border rounded-md border-[#4CAF7A] text-[#4CAF7A] font-extrabold text-base text-center py-2 px-5 w-full sm:w-1/2 my-3">
         {jobType}
       </p>
       <p className="flex gap-2 items-center font-semibold text-lg text-gray-500 mb-4 lg:mb-0">

@@ -22,27 +22,29 @@ const JobDetails = () => {
 
   return (
     <div>
-      <div className="h-60 bg-[#65e7a1] flex items-center justify-center mb-20 flex-col">
-        <h2 className="text-4xl font-bold ">Job Details - {jobTitle}</h2>
+      <div className="h-full md:h-60 p-12 md:py-16 bg-[#65e7a1] flex items-center justify-center mb-20 flex-col">
+        <h2 className="text-3xl md:text-4xl font-bold text-center">
+          Job Details - {jobTitle}
+        </h2>
 
         <br />
-        <p className="w-1/3 text-center text-lg">
+        <p className="w-full  sm:w-2/3 md:w-1/3 text-center text-lg">
           Explore in-depth job listings about <b> {jobTitle} </b> and find the
           details you need to land your next career opportunity.
         </p>
       </div>
 
-      <div className="w-1/2 mx-auto mb-20 text-left rounded-lg px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400">
-        <div className="flex justify-between items-center">
+      <div className="w-5/6 md:w-4/6 lg:w-1/2 mx-auto mb-20 text-left rounded-lg px-6 sm:px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400">
+        <div className="sm:flex justify-between items-center">
           <h2 className="font-bold text-xl ">{jobTitle}</h2>
-          <p className="text-xs">Deadline: {deadline}</p>
+          <p className="text-xs mt-2 sm:mt-0">Deadline: {deadline}</p>
         </div>
         <p className="text-[10px] mb-2 text-muted-foreground">
           Category: {jobCategory}
         </p>
         <p className="font-semibold text-lg text-gray-500">{companyName}</p>
 
-        <p className="border rounded-md border-[#4CAF7A] text-[#4CAF7A] font-extrabold text-base text-center py-2 px-5 w-1/3 my-3">
+        <p className="border rounded-md border-[#4CAF7A] text-[#4CAF7A] font-extrabold text-base text-center py-2 px-5 sm:w-1/3 my-3">
           {jobType}
         </p>
         <p className="inline-flex gap-2 items-center font-semibold text-lg text-gray-500 mb-4 lg:mb-0">

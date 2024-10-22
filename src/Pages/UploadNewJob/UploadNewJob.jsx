@@ -21,7 +21,7 @@ const UploadNewJob = () => {
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          fetch("http://localhost:5000/addJob", {
+          fetch("https://job-filder-server.vercel.app/addJob", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -44,10 +44,12 @@ const UploadNewJob = () => {
 
   return (
     <div className="mb-20">
-      <div className="h-60 bg-[#65e7a1] flex items-center justify-center mb-20 flex-col">
-        <h2 className="text-4xl font-bold ">Upload New Job</h2>
+      <div className="h-full md:h-60 p-12 md:py-16 bg-[#65e7a1] flex items-center justify-center mb-20 flex-col">
+        <h2 className="text-3xl md:text-4xl font-bold text-center">
+          Upload New Job
+        </h2>
         <br />
-        <p className="w-1/3 text-center text-lg">
+        <p className="w-full  sm:w-2/3 md:w-1/3 text-center text-lg">
           Easily post and upload new job opportunities to connect with top
           talent ahead.
         </p>
@@ -55,11 +57,11 @@ const UploadNewJob = () => {
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-screen-xl mx-auto w-1/2  mb-20 text-left rounded-lg px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400"
+        className="max-w-screen-xl mx-auto w-5/6 md:w-4/6 lg:w-1/2  mb-20 text-left rounded-lg px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400"
       >
         {/* Job Title and Date */}
-        <div className="grid grid-cols-2 gap-5 mb-8">
-          <div>
+        <div className="sm:grid grid-cols-2 gap-5 mb-8">
+          <div className="mb-8 sm:mb-0">
             <label
               htmlFor="jobTitle"
               className="cursor-pointer text-lg font-bold"
@@ -112,8 +114,8 @@ const UploadNewJob = () => {
         </div>
 
         {/* Category and Job Type */}
-        <div className="grid grid-cols-2 gap-5 mb-8">
-          <div>
+        <div className="sm:grid grid-cols-2 gap-5 mb-8">
+          <div className="mb-8 sm:mb-0">
             <label
               htmlFor="jobCategory"
               className="cursor-pointer text-lg font-bold"
@@ -256,6 +258,7 @@ const UploadNewJob = () => {
           ></textarea>
         </div>
 
+        {/* Upload and Cancel Button */}
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <Link
             type="button"
@@ -268,7 +271,7 @@ const UploadNewJob = () => {
             type="submit"
             className="rounded-md bg-[#4CAF7A] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#54c388] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4CAF7A]"
           >
-            Save
+            Upload
           </button>
         </div>
       </form>

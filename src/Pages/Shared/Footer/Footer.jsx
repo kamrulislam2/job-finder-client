@@ -16,7 +16,7 @@ const Footer = () => {
     if (email) {
       console.log(email);
 
-      fetch("http://localhost:5000/addEmail", {
+      fetch("https://job-filder-server.vercel.app/addEmail", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -40,12 +40,12 @@ const Footer = () => {
   };
 
   return (
-    <footer className="h-80 px-10 py-7 border-t-[1px] bg-black grid grid-cols-3 gap-10">
+    <footer className="h-full md:h-96 px-10 py-10 border-t-[1px] bg-black grid grid-cols-1 md:grid-cols-3 gap-10">
       <div className="text-start">
         <Link to="/">
-          <img className="w-64 h-16" src={LogoWhite} alt="" />
+          <img className="w-64 h-16" src={LogoWhite} alt="logo" />
         </Link>
-        <p className="text-white ps-2">
+        <p className="text-white ps-2 w-full">
           Discover your next career opportunity with Job Finder. Your gateway to
           the latest jobs across industries and locations.
         </p>

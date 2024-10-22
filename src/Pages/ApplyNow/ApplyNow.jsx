@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLoaderData, useParams } from "react-router-dom";
 import { GrMap } from "react-icons/gr";
 import { HiOutlineCurrencyDollar } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import FileUpload from "@/components/ui/file/FileUpload";
 
 const ApplyNow = () => {
   const allJobs = useLoaderData();
   const { id } = useParams();
 
+  const [pdfFile, setPdfFile] = useState(null);
+  // pdf file upload function
+  const handlePdfFileChange = (selectedFile) => {
+    setPdfFile(selectedFile);
+  };
+
   const {
+    _id,
     jobTitle,
     companyName,
     jobType,
@@ -29,19 +37,22 @@ const ApplyNow = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    const formData = new FormData();
-    console.log(data);
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("phone", data.phone);
-    formData.append("resume", data.resume[0]); // This is the file
-    formData.append("jobTitle", jobTitle);
-    formData.append("companyName", companyName);
-    formData.append("yourself", data.yourself);
+    const applicationData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      resume: pdfFile,
+      jobTitle: jobTitle,
+      companyName: companyName,
+      yourself: data.yourself,
+    };
 
-    fetch("http://localhost:5000/appliedJob", {
+    fetch("https://job-filder-server.vercel.app/appliedJob", {
       method: "POST",
-      body: formData,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(applicationData),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -62,28 +73,30 @@ const ApplyNow = () => {
 
   return (
     <div>
-      <div className="h-60 bg-[#65e7a1] flex items-center justify-center mb-20 flex-col">
-        <h2 className="text-4xl font-bold ">Application Form - {jobTitle}</h2>
+      <div className="h-full md:h-60 p-12 md:py-16 bg-[#65e7a1] flex items-center justify-center mb-20 flex-col">
+        <h2 className="text-2xl md:text-4xl font-bold text-center">
+          Application Form - {jobTitle}
+        </h2>
 
         <br />
-        <p className="w-1/3 text-center text-lg">
+        <p className="w-full  sm:w-2/3 md:w-1/3 text-center text-lg">
           Complete and submit your application for <b> {jobTitle} </b>
           effortlessly through our comprehensive and user-friendly form,
           designed to guide you every step of the way.
         </p>
       </div>
 
-      <div className="w-1/2 mx-auto mb-20 text-left rounded-lg px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400">
-        <div className="flex justify-between items-center">
+      <div className="w-5/6 md:w-4/6 lg:w-1/2 mx-auto mb-20 text-left rounded-lg px-6 sm:px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400">
+        <div className="sm:flex justify-between items-center">
           <h2 className="font-bold text-xl ">{jobTitle}</h2>
-          <p className="text-xs">Deadline: {deadline}</p>
+          <p className="text-xs mt-2 sm:mt-0">Deadline: {deadline}</p>
         </div>
         <p className="text-[10px] mb-2 text-muted-foreground">
           Category: {jobCategory}
         </p>
         <p className="font-semibold text-lg text-gray-500">{companyName}</p>
 
-        <p className="border rounded-md border-[#4CAF7A] text-[#4CAF7A] font-extrabold text-base text-center py-2 px-5 w-1/3 my-3">
+        <p className="border rounded-md border-[#4CAF7A] text-[#4CAF7A] font-extrabold text-base text-center py-2 px-5 sm:w-1/3 my-3">
           {jobType}
         </p>
         <p className="inline-flex gap-2 items-center font-semibold text-lg text-gray-500 mb-4 lg:mb-0">
@@ -110,16 +123,11 @@ const ApplyNow = () => {
           <h2 className="text-xl font-bold mb-4">Requirements:</h2>
           <p className="text-gray-500">{requirements}</p>
         </div>
-        {/* <Link to={`/applyNow/${_id}`}>
-          <button className="font-bold text-lg text-white bg-[#4CAF7A] hover:bg-[#54c388] py-3 px-3 lg:px-5 rounded-lg mb-auto shadow-2xl shadow-slate-700 hover:transition-all hover:scale-105">
-            Apply Now
-          </button>
-        </Link> */}
       </div>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="max-w-screen-xl mx-auto w-2/3  mb-20 text-left rounded-lg px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400"
+        className="max-w-screen-xl mx-auto w-5/6 sm:w-2/3  mb-20 text-left rounded-lg px-8 py-10 h-full border-b-8 border-[1px] border-b-[#4CAF7A] border-[#4CAF7A] rounded-b-2xl  shadow-2xl shadow-slate-400"
       >
         {/* Name*/}
         <div className="mb-8">
@@ -172,15 +180,7 @@ const ApplyNow = () => {
             Please Upload Your Resume{" "}
             <span className="font-bold">(PDF Only):</span>
           </label>
-          <input
-            type="file"
-            id="resume"
-            accept=".pdf"
-            className=" border-[1px] border-[#4CAF7A] rounded-md p-2 w-full focus-visible:outline-[#4CAF7A] mt-2"
-            placeholder="Please drop your resume"
-            {...register("resume")}
-            required
-          />
+          <FileUpload onPdfFileChange={handlePdfFileChange} />
         </div>
 
         {/* About yourself */}
@@ -215,7 +215,7 @@ const ApplyNow = () => {
             type="submit"
             className="rounded-md bg-[#4CAF7A] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#54c388] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4CAF7A]"
           >
-            Save
+            Apply
           </button>
         </div>
       </form>
